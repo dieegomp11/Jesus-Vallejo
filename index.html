@@ -1,0 +1,2124 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jesús Vallejo — Defensa Central</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ── VARIABLES ─────────────────────────────────────────── */
+    :root {
+      --white: #FFFFFF;
+      --off-white: #F7F7F5;
+      --surface: #F0F0EE;
+      --surface-dark: #E8E8E6;
+      --navy: #0D1B2A;
+      --navy-mid: #1E3A5F;
+      --navy-light: #2D5F8A;
+      --navy-mist: rgba(13, 27, 42, 0.06);
+      --ink: #0A0A0A;
+      --ink-secondary: #3A3A3A;
+      --ink-muted: #8A8A8A;
+      --ink-ghost: #C4C4C4;
+      --border: rgba(10, 10, 10, 0.10);
+      --border-strong: rgba(10, 10, 10, 0.20);
+      --border-navy: rgba(13, 27, 42, 0.25);
+    }
+
+    /* ── RESET ─────────────────────────────────────────────── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      border: none;
+      background: none;
+      cursor: none;
+    }
+
+    /* ── CURSOR ────────────────────────────────────────────── */
+    #cursor-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--ink);
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.2s;
+    }
+
+    #cursor-ring {
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(13, 27, 42, 0.35);
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s, height 0.3s, background 0.3s;
+    }
+
+    .cursor-hover #cursor-dot {
+      opacity: 0;
+    }
+
+    .cursor-hover #cursor-ring {
+      background: rgba(13, 27, 42, 0.13);
+    }
+
+    /* ── NAV ───────────────────────────────────────────────── */
+    #nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      transition: border-color 0.3s, background 0.3s;
+    }
+
+    #nav.scrolled {
+      border-bottom-color: var(--border-strong);
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(4px);
+    }
+
+    .nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 60px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      color: var(--ink);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--navy);
+    }
+
+    .nav-cta {
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      color: var(--white);
+      background: var(--navy);
+      padding: 10px 22px;
+      border-radius: 4px;
+      transition: background 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.2s;
+      display: inline-block;
+    }
+
+    .nav-cta:hover {
+      background: var(--navy-mid);
+    }
+
+    .nav-cta:active {
+      transform: scale(0.98);
+    }
+
+    /* ── HERO ──────────────────────────────────────────────── */
+    #hero {
+      min-height: 100dvh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 64px;
+      position: relative;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 56px 80px 80px;
+      position: relative;
+    }
+
+    .hero-label {
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      color: var(--navy);
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: clamp(60px, 7.5vw, 116px);
+      line-height: 0.93;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+      margin-top: 18px;
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    .hero-claim {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: clamp(17px, 1.8vw, 22px);
+      color: var(--ink-secondary);
+      margin-top: 22px;
+      opacity: 0;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-top: 40px;
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    .btn-primary {
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      color: var(--white);
+      background: var(--navy);
+      padding: 14px 28px;
+      border-radius: 4px;
+      transition: background 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.2s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      background: var(--navy-mid);
+    }
+
+    .btn-primary:active {
+      transform: scale(0.98);
+    }
+
+    .btn-ghost {
+      font-weight: 400;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      color: var(--ink-secondary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+
+    .btn-ghost:hover {
+      color: var(--navy);
+    }
+
+    .hero-scroll-cue {
+      position: absolute;
+      bottom: 36px;
+      left: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 52px;
+      background: linear-gradient(to bottom, var(--navy), transparent);
+    }
+
+    .hero-scroll-label {
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+    }
+
+    .hero-image {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .hero-slide.active {
+      opacity: 1;
+    }
+
+    .hero-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      filter: contrast(1.03);
+    }
+
+    /* vallejoradio — mostrar más de abajo */
+    .hero-slide:nth-child(3) img {
+      object-position: 50% 38%;
+    }
+
+    /* vallejoaplaudiendo — mostrar más de abajo */
+    .hero-slide:nth-child(4) img {
+      object-position: 50% 65%;
+    }
+
+    /* vallejofirmando — bajar al máximo, sin cortar abajo */
+    .hero-slide:nth-child(5) img {
+      object-position: 50% 100%;
+    }
+
+    .hero-image-fade {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--white) 0%, transparent 22%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .hero-indicators {
+      position: absolute;
+      bottom: 28px;
+      right: 32px;
+      display: flex;
+      gap: 8px;
+      z-index: 3;
+    }
+
+    .hero-ind {
+      width: 28px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.35);
+      border-radius: 1px;
+      cursor: pointer;
+      transition: background 0.3s, width 0.3s;
+    }
+
+    .hero-ind.active {
+      background: rgba(255, 255, 255, 0.90);
+      width: 44px;
+    }
+
+    /* ── MARQUEE ───────────────────────────────────────────── */
+    #marquee {
+      padding: 18px 0;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      position: relative;
+    }
+
+    #marquee::before,
+    #marquee::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100px;
+      z-index: 2;
+    }
+
+    #marquee::before {
+      left: 0;
+      background: linear-gradient(to right, #fff, transparent);
+    }
+
+    #marquee::after {
+      right: 0;
+      background: linear-gradient(to left, #fff, transparent);
+    }
+
+    .marquee-track {
+      display: flex;
+      animation: marqueeScroll 50s linear infinite;
+      white-space: nowrap;
+    }
+
+    .marquee-item {
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      padding: 0 28px;
+      display: inline-flex;
+      align-items: center;
+      gap: 28px;
+      flex-shrink: 0;
+    }
+
+    .m-dot {
+      display: inline-block;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--navy);
+      flex-shrink: 0;
+    }
+
+    @keyframes marqueeScroll {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* ── SHARED ────────────────────────────────────────────── */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 80px;
+    }
+
+    .section-label {
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--navy);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(34px, 3.8vw, 50px);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--ink);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── PROFILE ───────────────────────────────────────────── */
+    #profile {
+      padding: 120px 0;
+      background: var(--white);
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .profile-desc {
+      font-weight: 300;
+      font-size: 15.5px;
+      line-height: 1.78;
+      color: var(--ink-secondary);
+      margin-top: 24px;
+      max-width: 500px;
+    }
+
+    .profile-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      margin-top: 48px;
+      border-top: 1px solid var(--border);
+      padding-top: 32px;
+    }
+
+    .stat-col {
+      padding-right: 28px;
+      position: relative;
+    }
+
+    .stat-col+.stat-col {
+      padding-left: 28px;
+      padding-right: 28px;
+    }
+
+    .stat-col:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .stat-val {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-style: italic;
+      font-size: 44px;
+      color: var(--navy);
+      line-height: 1;
+    }
+
+    .stat-lbl {
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    .style-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 32px;
+    }
+
+    .style-tag {
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      color: var(--navy);
+      border: 1px solid var(--border-navy);
+      padding: 7px 14px;
+      border-radius: 2px;
+      background: transparent;
+      transition: background 0.35s ease-out, color 0.35s ease-out;
+    }
+
+    .style-tag:hover {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .profile-img-wrap {
+      position: relative;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      border: 1px solid var(--border-strong);
+      outline: 4px solid var(--white);
+      outline-offset: -5px;
+    }
+
+    .profile-img-wrap:hover .profile-slide {
+      filter: brightness(1.04);
+    }
+
+    .profile-slider {
+      display: flex;
+      width: 300%;
+      height: 100%;
+      transition: transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .profile-slide {
+      width: 33.3333%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      flex-shrink: 0;
+    }
+
+    .profile-inds {
+      position: absolute;
+      bottom: 60px;
+      left: 20px;
+      display: flex;
+      gap: 6px;
+      z-index: 2;
+    }
+
+    .profile-ind {
+      width: 20px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.40);
+      border-radius: 1px;
+      cursor: pointer;
+      transition: background 0.3s, width 0.3s;
+    }
+
+    .profile-ind.active {
+      background: rgba(255, 255, 255, 0.92);
+      width: 32px;
+    }
+
+    .profile-badge {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: var(--white);
+      border: 1px solid var(--navy);
+      color: var(--navy);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      padding: 8px 14px;
+      text-transform: uppercase;
+    }
+
+    /* ── TIMELINE ──────────────────────────────────────────── */
+    #timeline {
+      background: var(--off-white);
+    }
+
+    .timeline-outer {
+      position: relative;
+    }
+
+    .timeline-scene {
+      position: sticky;
+      top: 0;
+      height: 100dvh;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+    }
+
+    .tl-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .tl-bg-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      filter: brightness(0.92) saturate(1.15);
+      opacity: 0;
+      transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .tl-bg-img.active {
+      opacity: 1;
+    }
+
+    .tl-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(247, 247, 245, 0.22);
+      z-index: 1;
+    }
+
+    .tl-panel {
+      position: relative;
+      z-index: 2;
+      grid-column: 1;
+      display: flex;
+      align-items: center;
+      padding: 80px 56px 80px 80px;
+    }
+
+    .tl-card {
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid var(--border);
+      padding: 52px 52px;
+      max-width: 520px;
+      width: 100%;
+      position: relative;
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+
+    .tl-card.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .tl-watermark {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-style: italic;
+      font-size: 100px;
+      color: var(--navy);
+      opacity: 0.07;
+      line-height: 1;
+      position: absolute;
+      top: 12px;
+      right: 20px;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .tl-club-label {
+      font-weight: 500;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      color: var(--navy);
+      text-transform: uppercase;
+    }
+
+    .tl-club-name {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(26px, 2.8vw, 38px);
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-top: 8px;
+      line-height: 1.1;
+    }
+
+    .tl-meta {
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--ink-muted);
+      margin-top: 6px;
+    }
+
+    .tl-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 28px;
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+    }
+
+    .tl-sv {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-style: italic;
+      font-size: 30px;
+      color: var(--navy);
+    }
+
+    .tl-sl {
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      margin-top: 3px;
+    }
+
+    .tl-desc {
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 1.72;
+      color: var(--ink-secondary);
+      margin-top: 20px;
+    }
+
+    .tl-nav {
+      position: relative;
+      z-index: 2;
+      grid-column: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 72px 80px 32px;
+      gap: 4px;
+    }
+
+    .tl-nav-item {
+      padding: 12px 0 12px 18px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .tl-nav-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: transparent;
+      transition: background 0.3s;
+    }
+
+    .tl-nav-name {
+      font-weight: 500;
+      font-size: 13px;
+      color: var(--ink-secondary);
+      transition: color 0.3s;
+    }
+
+    .tl-nav-year {
+      font-size: 11px;
+      color: var(--ink-muted);
+      margin-top: 2px;
+    }
+
+    .tl-nav-item.active .tl-nav-name {
+      color: var(--navy);
+    }
+
+    .tl-nav-item.active::before {
+      background: var(--navy);
+    }
+
+    /* ── NUMBERS ───────────────────────────────────────────── */
+    #numbers {
+      padding: 120px 0;
+      background: var(--white);
+    }
+
+    .numbers-head {
+      margin-bottom: 64px;
+    }
+
+    .numbers-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--border);
+      border-left: 1px solid var(--border);
+    }
+
+    .num-cell {
+      padding: 48px 40px;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .num-val {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-style: italic;
+      font-size: clamp(40px, 4vw, 60px);
+      color: var(--navy);
+      line-height: 1;
+      transition: color 0.3s;
+    }
+
+    .num-cell:hover .num-val {
+      color: var(--ink);
+    }
+
+    .num-lbl {
+      font-weight: 400;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      margin-top: 10px;
+      text-transform: uppercase;
+    }
+
+    /* ── GALLERY ───────────────────────────────────────────── */
+    #gallery {
+      padding: 120px 0;
+      background: var(--off-white);
+    }
+
+    .gallery-head {
+      margin-bottom: 56px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 500px 300px;
+      gap: 3px;
+    }
+
+    /* Fila 1 — 4 fotos verticales */
+    .gallery-item:nth-child(1) {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .gallery-item:nth-child(2) {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .gallery-item:nth-child(3) {
+      grid-column: 3;
+      grid-row: 1;
+    }
+
+    .gallery-item:nth-child(4) {
+      grid-column: 4;
+      grid-row: 1;
+    }
+
+    /* Fila 2 — 2 fotos horizontales */
+    .gallery-item:nth-child(5) {
+      grid-column: 1 / 3;
+      grid-row: 2;
+    }
+
+    .gallery-item:nth-child(6) {
+      grid-column: 3 / 5;
+      grid-row: 2;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      filter: grayscale(0%) brightness(0.97);
+      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        filter 0.5s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+      filter: brightness(1.05);
+    }
+
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 40px 20px 16px;
+      background: linear-gradient(to top, rgba(10, 10, 10, 0.65) 0%, rgba(10, 10, 10, 0.15) 60%, transparent 100%);
+      opacity: 0.75;
+      transition: opacity 0.3s;
+    }
+
+    .gallery-item:hover .gallery-caption {
+      opacity: 1;
+    }
+
+    .gallery-cap-club {
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: #fff;
+      text-transform: uppercase;
+    }
+
+    .gallery-cap-txt {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.65);
+      margin-top: 2px;
+    }
+
+    /* ── SELECCIÓN ─────────────────────────────────────────── */
+    #seleccion {
+      padding: 120px 0 0;
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .sel-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: end;
+      margin-bottom: 72px;
+    }
+
+    .sel-header .section-label {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .sel-header .section-title {
+      color: var(--white);
+    }
+
+    .sel-intro {
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.78;
+      color: rgba(255, 255, 255, 0.60);
+      align-self: end;
+    }
+
+    .sel-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .sel-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sel-card-img {
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .sel-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      filter: brightness(0.85) saturate(1.1);
+      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        filter 0.5s ease;
+    }
+
+    .sel-card:hover .sel-card-img img {
+      transform: scale(1.04);
+      filter: brightness(0.95) saturate(1.2);
+    }
+
+    .sel-card:nth-child(1) .sel-card-img img {
+      object-position: 25% top;
+    }
+
+    .sel-card:nth-child(2) .sel-card-img img {
+      object-position: 40% top;
+    }
+
+    .sel-card-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top,
+          rgba(13, 27, 42, 0.85) 0%,
+          rgba(13, 27, 42, 0.20) 50%,
+          transparent 100%);
+    }
+
+    .sel-card-body {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 32px 28px;
+    }
+
+    .sel-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border-radius: 2px;
+      margin-bottom: 10px;
+    }
+
+    .sel-badge.oro {
+      background: rgba(201, 168, 76, 0.20);
+      color: #C9A84C;
+      border: 1px solid rgba(201, 168, 76, 0.40);
+    }
+
+    .sel-badge.plata {
+      background: rgba(192, 192, 210, 0.20);
+      color: #C0C0D2;
+      border: 1px solid rgba(192, 192, 210, 0.40);
+    }
+
+    .sel-card-year {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-style: italic;
+      font-size: 52px;
+      color: rgba(255, 255, 255, 0.12);
+      line-height: 1;
+      position: absolute;
+      top: 20px;
+      right: 24px;
+    }
+
+    .sel-card-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(18px, 2vw, 24px);
+      letter-spacing: -0.01em;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .sel-card-desc {
+      font-weight: 300;
+      font-size: 13px;
+      line-height: 1.65;
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    .sel-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 2px;
+    }
+
+    .sel-strip-item {
+      height: 240px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .sel-strip-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      filter: brightness(0.80) saturate(1.1);
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        filter 0.4s ease;
+    }
+
+    .sel-strip-item:hover img {
+      transform: scale(1.05);
+      filter: brightness(0.95) saturate(1.2);
+    }
+
+    .sel-strip-caption {
+      position: absolute;
+      bottom: 14px;
+      left: 16px;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      color: rgba(255, 255, 255, 0.60);
+      text-transform: uppercase;
+    }
+
+    /* Responsive selección */
+    @media (max-width: 1024px) {
+      .sel-header {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .sel-cards {
+        grid-template-columns: 1fr;
+        gap: 2px;
+      }
+
+      .sel-card-img {
+        aspect-ratio: 16/9;
+      }
+
+      .sel-strip {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      #seleccion {
+        padding: 80px 0 0;
+      }
+
+      .sel-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .sel-strip-item {
+        height: 220px;
+      }
+    }
+
+    /* ── FOOTER ────────────────────────────────────────────── */
+    #footer {
+      background: var(--navy);
+    }
+
+    .footer-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 48px 80px 48px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .footer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 36px;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 26px;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+
+    .footer-tagline {
+      font-weight: 300;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.45);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-weight: 500;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.80);
+      letter-spacing: 0.04em;
+      transition: opacity 0.2s;
+    }
+
+    .footer-links a:hover {
+      opacity: 0.55;
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 24px;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.35);
+      font-weight: 400;
+    }
+
+    /* ── RESPONSIVE ────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      #hero {
+        grid-template-columns: 1fr;
+        grid-template-rows: 55dvh 1fr;
+      }
+
+      .hero-image {
+        grid-row: 1;
+      }
+
+      .hero-image-fade {
+        background: linear-gradient(to bottom, transparent 50%, var(--white) 100%);
+      }
+
+      .hero-content {
+        grid-row: 2;
+        padding: 32px 40px 64px;
+        justify-content: flex-start;
+      }
+
+      .hero-scroll-cue {
+        display: none;
+      }
+
+      .profile-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .timeline-scene {
+        grid-template-columns: 1fr;
+      }
+
+      .tl-nav {
+        display: none;
+      }
+
+      .tl-panel {
+        padding: 40px;
+      }
+
+      .container {
+        padding: 0 40px;
+      }
+
+      .numbers-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 340px 340px 260px;
+      }
+
+      .gallery-item:nth-child(1) {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .gallery-item:nth-child(2) {
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      .gallery-item:nth-child(3) {
+        grid-column: 1;
+        grid-row: 2;
+      }
+
+      .gallery-item:nth-child(4) {
+        grid-column: 2;
+        grid-row: 2;
+      }
+
+      .gallery-item:nth-child(5) {
+        grid-column: 1;
+        grid-row: 3;
+      }
+
+      .gallery-item:nth-child(6) {
+        grid-column: 2;
+        grid-row: 3;
+      }
+
+      .footer-inner {
+        padding: 40px 40px 40px;
+      }
+
+      .footer-top {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-inner {
+        padding: 0 24px;
+      }
+
+      #profile,
+      #numbers,
+      #gallery {
+        padding: 80px 0;
+      }
+
+      .numbers-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .profile-stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .container {
+        padding: 0 24px;
+      }
+
+      .gallery-grid {
+        grid-template-rows: 280px 280px 220px;
+      }
+
+      .footer-inner {
+        padding: 32px 24px 32px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-name {
+        font-size: 58px;
+      }
+
+      .numbers-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- ─── NAV ──────────────────────────────────────────────────── -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">JESÚS VALLEJO</a>
+      <ul class="nav-links">
+        <li><a href="#profile">Perfil</a></li>
+        <li><a href="#timeline">Trayectoria</a></li>
+        <li><a href="#numbers">En números</a></li>
+        <li><a href="#gallery">Galería</a></li>
+        <li><a href="#seleccion">Selección</a></li>
+      </ul>
+      <a href="#gallery" class="nav-cta">Ver galería</a>
+    </div>
+  </nav>
+
+  <!-- ─── HERO ──────────────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="hero-content">
+      <span class="hero-label">Defensa Central · Internacional Español</span>
+      <h1 class="hero-name">JESÚS<br>VALLEJO</h1>
+      <p class="hero-claim">"El equipo siempre primero."</p>
+      <div class="hero-actions">
+        <a href="#timeline" class="btn-primary">Ver trayectoria</a>
+        <a href="#profile" class="btn-ghost">Conocer más →</a>
+      </div>
+      <div class="hero-scroll-cue">
+        <div class="hero-scroll-line"></div>
+        <span class="hero-scroll-label">Scroll</span>
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="hero-slide active">
+        <img src="vallejosentado.webp" alt="Jesús Vallejo — entrevista">
+      </div>
+      <div class="hero-slide">
+        <img src="vallejotraje.jpg" alt="Jesús Vallejo — traje">
+      </div>
+      <div class="hero-slide">
+        <img src="vallejoradio.jpeg" alt="Jesús Vallejo — radio">
+      </div>
+      <div class="hero-slide">
+        <img src="vallejoaplaudiendo.jpeg" alt="Jesús Vallejo — afición">
+      </div>
+      <div class="hero-slide">
+        <img src="vallejofirmando.jpeg" alt="Jesús Vallejo — firmas">
+      </div>
+      <div class="hero-image-fade"></div>
+      <div class="hero-indicators">
+        <div class="hero-ind active" data-slide="0"></div>
+        <div class="hero-ind" data-slide="1"></div>
+        <div class="hero-ind" data-slide="2"></div>
+        <div class="hero-ind" data-slide="3"></div>
+        <div class="hero-ind" data-slide="4"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── MARQUEE ───────────────────────────────────────────────── -->
+  <div id="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-item">Real Madrid <span class="m-dot"></span></span>
+      <span class="marquee-item">Eintracht Frankfurt <span class="m-dot"></span></span>
+      <span class="marquee-item">Wolverhampton Wanderers <span class="m-dot"></span></span>
+      <span class="marquee-item">Real Zaragoza <span class="m-dot"></span></span>
+      <span class="marquee-item">Granada CF <span class="m-dot"></span></span>
+      <span class="marquee-item">Albacete Balompié <span class="m-dot"></span></span>
+      <span class="marquee-item">Selección Española <span class="m-dot"></span></span>
+      <span class="marquee-item">Champions League <span class="m-dot"></span></span>
+      <!-- duplicate for seamless loop -->
+      <span class="marquee-item">Real Madrid <span class="m-dot"></span></span>
+      <span class="marquee-item">Eintracht Frankfurt <span class="m-dot"></span></span>
+      <span class="marquee-item">Wolverhampton Wanderers <span class="m-dot"></span></span>
+      <span class="marquee-item">Real Zaragoza <span class="m-dot"></span></span>
+      <span class="marquee-item">Granada CF <span class="m-dot"></span></span>
+      <span class="marquee-item">Albacete Balompié <span class="m-dot"></span></span>
+      <span class="marquee-item">Selección Española <span class="m-dot"></span></span>
+      <span class="marquee-item">Champions League <span class="m-dot"></span></span>
+    </div>
+  </div>
+
+  <!-- ─── PROFILE ───────────────────────────────────────────────── -->
+  <section id="profile">
+    <div class="container">
+      <div class="profile-grid">
+
+        <!-- Text column -->
+        <div>
+          <span class="section-label reveal">Perfil</span>
+          <h2 class="section-title reveal">
+            Defensa de élite, <br>forjado con los valores<br>
+            <em>de quien nunca olvida sus raíces.</em>
+          </h2>
+          <p class="profile-desc reveal">
+            Central de jerarquía forjado en el Real Zaragoza. Tras destacar en el fútbol español, consolidó su perfil
+            internacional en la Bundesliga y la Premier League. Jesús Vallejo destaca por su inteligencia posicional y
+            su capacidad de mando, siendo un defensor capaz de organizar la zaga con solvencia y autoridad en momentos
+            críticos.
+          </p>
+
+          <div class="profile-stats reveal">
+            <div class="stat-col">
+              <div class="stat-val">187</div>
+              <div class="stat-lbl">cm · altura</div>
+            </div>
+            <div class="stat-col">
+              <div class="stat-val">80</div>
+              <div class="stat-lbl">kg · peso</div>
+            </div>
+            <div class="stat-col">
+              <div class="stat-val">D</div>
+              <div class="stat-lbl">pie dominante</div>
+            </div>
+          </div>
+
+          <div class="style-tags reveal">
+            <span class="style-tag">Juego aéreo</span>
+            <span class="style-tag">Lectura táctica</span>
+            <span class="style-tag">Salida de balón</span>
+            <span class="style-tag">Liderazgo defensivo</span>
+            <span class="style-tag">Pressing alto</span>
+            <span class="style-tag">Marcaje zonal</span>
+            <span class="style-tag">1 vs 1</span>
+          </div>
+        </div>
+
+        <!-- Image column -->
+        <div class="reveal">
+          <div class="profile-img-wrap">
+            <div class="profile-slider" id="profile-slider">
+              <img class="profile-slide" src="vallejomadrid2.webp" alt="Jesús Vallejo — Real Madrid">
+              <img class="profile-slide" src="vallejocity2.jpg" alt="Jesús Vallejo — City">
+              <img class="profile-slide" src="vallejoseleccion2.jpg" alt="Jesús Vallejo — Selección">
+            </div>
+            <div class="profile-badge" id="profile-badge">Real Madrid · 2024–25</div>
+            <div class="profile-inds">
+              <div class="profile-ind active" data-slide="0"></div>
+              <div class="profile-ind" data-slide="1"></div>
+              <div class="profile-ind" data-slide="2"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── TIMELINE ──────────────────────────────────────────────── -->
+  <section id="timeline">
+    <div class="timeline-outer" id="timeline-outer">
+
+      <div class="timeline-scene" id="timeline-scene">
+        <!-- Background images — 2 por club, rotan automáticamente -->
+        <div class="tl-bg" id="tl-bg">
+          <img class="tl-bg-img active" src="vallejozaragoza.webp" alt="" data-club="0" data-slot="0">
+          <img class="tl-bg-img" src="vallejozaragoza2.jpg" alt="" data-club="0" data-slot="1">
+          <img class="tl-bg-img" src="vallejoeintracht.jpg" alt="" data-club="1" data-slot="0">
+          <img class="tl-bg-img" src="eintracht3.jpg" alt="" data-club="1" data-slot="1">
+          <img class="tl-bg-img" src="vallejogranada.jpg" alt="" data-club="2" data-slot="0">
+          <img class="tl-bg-img" src="vallejogranada2.jpg" alt="" data-club="2" data-slot="1">
+          <img class="tl-bg-img" src="vallejowolves.webp" alt="" data-club="3" data-slot="0">
+          <img class="tl-bg-img" src="vallejowolves2.jpg" alt="" data-club="3" data-slot="1">
+          <img class="tl-bg-img" src="vallejomadrid.jpg" alt="" data-club="4" data-slot="0">
+          <img class="tl-bg-img" src="vallejomadrid2.webp" alt="" data-club="4" data-slot="1">
+          <img class="tl-bg-img" src="vallejoalbacete.jpeg" alt="" data-club="5" data-slot="0">
+          <img class="tl-bg-img" src="vallejoalbacete2.jpeg" alt="" data-club="5" data-slot="1">
+          <div class="tl-bg-overlay"></div>
+        </div>
+
+        <!-- Content panel -->
+        <div class="tl-panel">
+          <div class="tl-card active" id="tl-card">
+            <div class="tl-watermark" id="tl-wm">01</div>
+            <div class="tl-club-label">Trayectoria</div>
+            <h3 class="tl-club-name" id="tl-name">Real Zaragoza</h3>
+            <p class="tl-meta" id="tl-meta">2014–2015 · España · Segunda División</p>
+            <div class="tl-stats">
+              <div>
+                <div class="tl-sv" id="tl-s1">34</div>
+                <div class="tl-sl" id="tl-l1">Partidos</div>
+              </div>
+              <div>
+                <div class="tl-sv" id="tl-s2">2</div>
+                <div class="tl-sl" id="tl-l2">Goles</div>
+              </div>
+              <div>
+                <div class="tl-sv" id="tl-s3">87%</div>
+                <div class="tl-sl" id="tl-l3">Duelos aéreos</div>
+              </div>
+              <div>
+                <div class="tl-sv" id="tl-s4">91%</div>
+                <div class="tl-sl" id="tl-l4">Pases completados</div>
+              </div>
+            </div>
+            <p class="tl-desc" id="tl-desc">
+              Debut profesional con solo 17 años en Segunda División con el equipo de su ciudad.
+              Conquistó la titularidad desde el primer mes, demostrando una madurez defensiva
+              fuera de lo común que llamó la atención del Real Madrid.
+            </p>
+          </div>
+        </div>
+
+        <!-- Lateral nav (desktop) -->
+        <nav class="tl-nav">
+          <div class="tl-nav-item active" data-idx="0">
+            <div class="tl-nav-name">Real Zaragoza</div>
+            <div class="tl-nav-year">2014–2015</div>
+          </div>
+          <div class="tl-nav-item" data-idx="1">
+            <div class="tl-nav-name">Eintracht Frankfurt</div>
+            <div class="tl-nav-year">2017–2018</div>
+          </div>
+          <div class="tl-nav-item" data-idx="2">
+            <div class="tl-nav-name">Granada CF</div>
+            <div class="tl-nav-year">2018–2019</div>
+          </div>
+          <div class="tl-nav-item" data-idx="3">
+            <div class="tl-nav-name">Wolverhampton</div>
+            <div class="tl-nav-year">2019–2020</div>
+          </div>
+          <div class="tl-nav-item" data-idx="4">
+            <div class="tl-nav-name">Real Madrid</div>
+            <div class="tl-nav-year">2016–2024</div>
+          </div>
+          <div class="tl-nav-item" data-idx="5">
+            <div class="tl-nav-name">Albacete Balompié</div>
+            <div class="tl-nav-year">2022–2023</div>
+          </div>
+        </nav>
+      </div><!-- /timeline-scene -->
+
+    </div><!-- /timeline-outer -->
+  </section>
+
+  <!-- ─── NUMBERS ───────────────────────────────────────────────── -->
+  <section id="numbers">
+    <div class="container">
+      <div class="numbers-head">
+        <span class="section-label reveal">En números</span>
+        <h2 class="section-title reveal">Una carrera<br><em>en cifras.</em></h2>
+      </div>
+      <div class="numbers-grid">
+        <div class="num-cell reveal" data-count="250" data-suffix="+">
+          <div class="num-val">250+</div>
+          <div class="num-lbl">Partidos profesionales</div>
+        </div>
+        <div class="num-cell reveal" data-count="2">
+          <div class="num-val">2</div>
+          <div class="num-lbl">Champions League</div>
+        </div>
+        <div class="num-cell reveal" data-count="11">
+          <div class="num-val">11</div>
+          <div class="num-lbl">Títulos</div>
+        </div>
+        <div class="num-cell reveal" data-count="47">
+          <div class="num-val">47</div>
+          <div class="num-lbl">Internacionalidades</div>
+        </div>
+        <div class="num-cell reveal">
+          <div class="num-val">74%</div>
+          <div class="num-lbl">Duelos defensivos ganados</div>
+        </div>
+        <div class="num-cell reveal">
+          <div class="num-val">88%</div>
+          <div class="num-lbl">Acierto en duelos aéreos</div>
+        </div>
+        <div class="num-cell reveal" data-count="6">
+          <div class="num-val">6</div>
+          <div class="num-lbl">Clubs europeos de élite</div>
+        </div>
+        <div class="num-cell reveal" data-count="10">
+          <div class="num-val">10+</div>
+          <div class="num-lbl">Años de carrera profesional</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── GALLERY ───────────────────────────────────────────────── -->
+  <section id="gallery">
+    <div class="container">
+      <div class="gallery-head">
+        <span class="section-label reveal">Momentos destacados</span>
+        <h2 class="section-title reveal">Grandes noches,<br><em>títulos eternos.</em></h2>
+      </div>
+      <div class="gallery-grid">
+        <!-- Fila 1: 4 verticales -->
+        <div class="gallery-item reveal">
+          <img src="vallejochampions.jpg" alt="Champions League — Real Madrid">
+          <div class="gallery-caption">
+            <div class="gallery-cap-club">Real Madrid</div>
+            <div class="gallery-cap-txt">Champions League 2022 </div>
+          </div>
+        </div>
+        <div class="gallery-item reveal">
+          <img src="vallejocopa.jpg" alt="Copa del Rey">
+          <div class="gallery-caption">
+            <div class="gallery-cap-club">Real Madrid</div>
+            <div class="gallery-cap-txt">Copa del Rey 2023</div>
+          </div>
+        </div>
+        <div class="gallery-item reveal">
+          <img src="vallejosupercopaeuropa.jpg" alt="Supercopa de España">
+          <div class="gallery-caption">
+            <div class="gallery-cap-club">Real Madrid</div>
+            <div class="gallery-cap-txt">Supercopa de Europa 2024</div>
+          </div>
+        </div>
+        <div class="gallery-item reveal">
+          <img src="intercontinental.jpg" alt="Copa Intercontinental">
+          <div class="gallery-caption">
+            <div class="gallery-cap-club">Real Madrid</div>
+            <div class="gallery-cap-txt">Copa Intercontinental 2024</div>
+          </div>
+        </div>
+        <!-- Fila 2: 2 horizontales -->
+        <div class="gallery-item reveal">
+          <img src="vallejoeuropeo.jpeg" alt="Europeo Sub-21">
+          <div class="gallery-caption">
+            <div class="gallery-cap-club">Selección Española</div>
+            <div class="gallery-cap-txt">Europeo Sub-21 2019</div>
+          </div>
+        </div>
+        <div class="gallery-item reveal">
+          <img src="champions18.jpg" alt="Mundial Rusia 2018">
+          <div class="gallery-caption">
+            <div class="gallery-cap-club">Real Madrid</div>
+            <div class="gallery-cap-txt"> Champions League 2018</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SELECCIÓN ESPAÑOLA ──────────────────────────────────────── -->
+  <section id="seleccion">
+    <div class="container">
+
+      <div class="sel-header">
+        <div>
+          <span class="section-label reveal">Selección Española</span>
+          <h2 class="section-title reveal">Tres torneos,<br><em>tres podios.</em></h2>
+        </div>
+        <p class="sel-intro reveal">
+          Una trayectoria con La Roja que va del primer título con la sub-19
+          al liderazgo como capitán en el Europeo sub-21, culminando con la
+          medalla de plata olímpica en Tokio. Vallejo, referente en cada
+          generación de la selección.
+        </p>
+      </div>
+
+      <div class="sel-cards">
+
+        <!-- Sub-19 2015 -->
+        <div class="sel-card reveal">
+          <div class="sel-card-img">
+            <img src="vallejo2015.jpg" alt="Europeo Sub-19 2015">
+            <div class="sel-card-img-overlay"></div>
+            <div class="sel-card-year">15</div>
+          </div>
+          <div class="sel-card-body">
+            <span class="sel-badge oro">Oro</span>
+            <h3 class="sel-card-title">Europeo Sub-19<br>Grecia 2015</h3>
+            <p class="sel-card-desc">
+              Campeón de Europa con la selección española sub-19 siendo capitán.
+              Un título que marcó el inicio de una relación especial
+              con La Roja.
+            </p>
+          </div>
+        </div>
+
+        <!-- Sub-21 2019 -->
+        <div class="sel-card reveal">
+          <div class="sel-card-img">
+            <img src="vallejoeuropeo.jpeg" alt="Europeo Sub-21 2019">
+            <div class="sel-card-img-overlay"></div>
+            <div class="sel-card-year">19</div>
+          </div>
+          <div class="sel-card-body">
+            <span class="sel-badge oro">Oro · Capitán</span>
+            <h3 class="sel-card-title">Europeo Sub-21<br>Italia 2019</h3>
+            <p class="sel-card-desc">
+              Capitán de la selección española sub-21 que conquistó
+              el título europeo en Italia. Liderazgo y personalidad
+              en cada partido.
+            </p>
+          </div>
+        </div>
+
+        <!-- JJOO Tokio 2021 -->
+        <div class="sel-card reveal">
+          <div class="sel-card-img">
+            <img src="vallejojjoo2.jpeg" alt="JJOO Tokio 2021">
+            <div class="sel-card-img-overlay"></div>
+            <div class="sel-card-year">21</div>
+          </div>
+          <div class="sel-card-body">
+            <span class="sel-badge plata">Plata</span>
+            <h3 class="sel-card-title">Juegos Olímpicos<br>Tokio 2020</h3>
+            <p class="sel-card-desc">
+              Medalla de plata en los Juegos Olímpicos de Tokio,
+              una de las gestas más emotivas del deporte español
+              en la disciplina olímpica.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Franja de fotos JJOO -->
+      <div class="sel-strip">
+        <div class="sel-strip-item">
+          <img src="vallejo2015europeo.jpg" alt="Europeo Sub-19 2015">
+          <span class="sel-strip-caption">Europeo Sub-19 2015</span>
+        </div>
+        <div class="sel-strip-item">
+          <img src="vallejoseleccion2.jpg" alt="Europeo Sub-21 2019">
+          <span class="sel-strip-caption">Europeo Sub-21 2019</span>
+        </div>
+        <div class="sel-strip-item">
+          <img src="vallejojjoo3.jpg" alt="JJOO Tokio 2020">
+          <span class="sel-strip-caption">JJOO Tokio 2020</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ────────────────────────────────────────────────── -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <span class="footer-logo">VALLEJO</span>
+        <p class="footer-tagline">Jesús Vallejo · Defensa Central</p>
+        <ul class="footer-links">
+          <li><a href="#profile">Perfil</a></li>
+          <li><a href="#timeline">Trayectoria</a></li>
+          <li><a href="#gallery">Galería</a></li>
+          <li><a href="#numbers">En números</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2025 Jesús Vallejo. Todos los derechos reservados.</p>
+        <p class="footer-copy">Portfolio profesional · Zaragoza, España</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─── SCRIPTS ───────────────────────────────────────────────── -->
+  <script>
+    /* ── CURSOR ──────────────────────────────────────────────── */
+    const dot = document.getElementById('cursor-dot');
+    const ring = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    document.querySelectorAll('a, button, .style-tag, .tl-nav-item, .gallery-item').forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    });
+    (function tick() {
+      rx += (mx - rx) * 0.10;
+      ry += (my - ry) * 0.10;
+      dot.style.left = mx + 'px';
+      dot.style.top = my + 'px';
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(tick);
+    })();
+
+    /* ── NAV SCROLL STATE ─────────────────────────────────────── */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    /* ── HERO ENTRANCE ───────────────────────────────────────── */
+    function animateHero() {
+      const ease = 'cubic-bezier(0.25,0.46,0.45,0.94)';
+      const items = [
+        document.querySelector('.hero-label'),
+        document.querySelector('.hero-name'),
+        document.querySelector('.hero-claim'),
+        document.querySelector('.hero-actions'),
+        document.querySelector('.hero-scroll-cue')
+      ];
+      items.forEach((el, i) => {
+        if (!el) return;
+        el.style.transition = `opacity 0.85s ${ease}, transform 0.85s ${ease}`;
+        el.style.transitionDelay = (300 + i * 280) + 'ms';
+        requestAnimationFrame(() => {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        });
+      });
+    }
+    window.addEventListener('load', animateHero);
+
+    /* ── SCROLL REVEAL ───────────────────────────────────────── */
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.18 });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    /* ── STYLE TAGS CASCADE ──────────────────────────────────── */
+    document.querySelectorAll('.style-tag').forEach((t, i) => {
+      t.style.transitionDelay = (i * 50) + 'ms';
+    });
+
+    /* ── TIMELINE ────────────────────────────────────────────── */
+    const clubs = [
+      {
+        num: '01', name: 'Real Zaragoza',
+        meta: '2014–2015 · España · Segunda División',
+        s1: '34', l1: 'Partidos', s2: '2', l2: 'Goles',
+        s3: '87%', l3: 'Duelos aéreos', s4: '91%', l4: 'Pases completados',
+        desc: 'Debut profesional con 17 años en Segunda División con el equipo de su ciudad natal. Conquistó la titularidad desde el primer mes y su madurez defensiva llamó la atención del Real Madrid.'
+      },
+      {
+        num: '02', name: 'Eintracht Frankfurt',
+        meta: '2017–2018 · Alemania · Bundesliga',
+        s1: '23', l1: 'Partidos', s2: '1', l2: 'Goles',
+        s3: '79%', l3: 'Duelos aéreos', s4: '88%', l4: 'Pases completados',
+        desc: 'Primera experiencia en el extranjero. Integración en la intensidad del fútbol alemán, consolidando su posicionamiento defensivo frente a los mejores delanteros de la Bundesliga.'
+      },
+      {
+        num: '03', name: 'Granada CF',
+        meta: '2018–2019 · España · Segunda División',
+        s1: '29', l1: 'Partidos', s2: '1', l2: 'Goles',
+        s3: '83%', l3: 'Duelos aéreos', s4: '90%', l4: 'Pases completados',
+        desc: 'Pieza clave en el ascenso del Granada CF a Primera División. Lideró la línea defensiva con autoridad durante toda la temporada, siendo uno de los mejores centrales de la categoría.'
+      },
+      {
+        num: '04', name: 'Wolverhampton Wanderers',
+        meta: '2019–2020 · Inglaterra · Premier League',
+        s1: '18', l1: 'Partidos', s2: '0', l2: 'Goles',
+        s3: '82%', l3: 'Duelos aéreos', s4: '89%', l4: 'Pases completados',
+        desc: 'Temporada en la Premier League con los Wolves. Adaptación al fútbol físico inglés compitiendo también en Europa League, reforzando su polivalencia en defensas de alto nivel.'
+      },
+      {
+        num: '05', name: 'Real Madrid',
+        meta: '2016–2024 · España · Primera División',
+        s1: '52', l1: 'Partidos', s2: '2', l2: 'Goles',
+        s3: '85%', l3: 'Duelos aéreos', s4: '93%', l4: 'Pases completados',
+        desc: 'Canterano y jugador del primer equipo merengue. Tres Champions League, La Liga, Copa del Rey y Copa del Mundo de Clubes. El pináculo de su carrera junto a los mejores del planeta.'
+      },
+      {
+        num: '06', name: 'Albacete Balompié',
+        meta: '2022–2023 · España · Segunda División',
+        s1: '28', l1: 'Partidos', s2: '1', l2: 'Goles',
+        s3: '81%', l3: 'Duelos aéreos', s4: '90%', l4: 'Pases completados',
+        desc: 'Líder defensivo y referente en el vestuario. Su experiencia internacional fue clave en el proyecto de ascenso del Albacete, aportando jerarquía en los momentos decisivos de la temporada.'
+      }
+    ];
+
+    let currentIdx = 0;
+    let rotateTimer = null;
+    let currentSlot = 0;
+    const tlCard = document.getElementById('tl-card');
+    const allBgImgs = document.querySelectorAll('.tl-bg-img');
+    const navItems = document.querySelectorAll('.tl-nav-item');
+    const tlo = document.getElementById('timeline-outer');
+    const NUM_CLUBS = clubs.length;
+
+    tlo.style.height = (NUM_CLUBS * 100 + 20) + 'vh';
+
+    function showSlot(clubIdx, slot) {
+      allBgImgs.forEach(img => img.classList.remove('active'));
+      const target = document.querySelector(
+        `.tl-bg-img[data-club="${clubIdx}"][data-slot="${slot}"]`
+      );
+      if (target) target.classList.add('active');
+    }
+
+    function startRotation(clubIdx) {
+      clearInterval(rotateTimer);
+      currentSlot = 0;
+      showSlot(clubIdx, 0);
+      rotateTimer = setInterval(() => {
+        currentSlot = 1 - currentSlot;
+        showSlot(clubIdx, currentSlot);
+      }, 3500);
+    }
+
+    function setClub(idx) {
+      if (idx === currentIdx) return;
+      const c = clubs[idx];
+
+      tlCard.classList.remove('active');
+      setTimeout(() => {
+        document.getElementById('tl-wm').textContent = c.num;
+        document.getElementById('tl-name').textContent = c.name;
+        document.getElementById('tl-meta').textContent = c.meta;
+        document.getElementById('tl-s1').textContent = c.s1;
+        document.getElementById('tl-l1').textContent = c.l1;
+        document.getElementById('tl-s2').textContent = c.s2;
+        document.getElementById('tl-l2').textContent = c.l2;
+        document.getElementById('tl-s3').textContent = c.s3;
+        document.getElementById('tl-l3').textContent = c.l3;
+        document.getElementById('tl-s4').textContent = c.s4;
+        document.getElementById('tl-l4').textContent = c.l4;
+        document.getElementById('tl-desc').textContent = c.desc;
+
+        startRotation(idx);
+
+        navItems.forEach(n => n.classList.remove('active'));
+        if (navItems[idx]) navItems[idx].classList.add('active');
+
+        currentIdx = idx;
+        tlCard.classList.add('active');
+      }, 260);
+    }
+
+    /* Arrancar rotación del primer club al cargar */
+    startRotation(0);
+
+    /* Scroll-driven club switching */
+    window.addEventListener('scroll', () => {
+      const rect = tlo.getBoundingClientRect();
+      const totalScroll = tlo.offsetHeight - window.innerHeight;
+      const scrolled = -rect.top;
+      if (scrolled >= 0 && scrolled <= totalScroll) {
+        const progress = scrolled / totalScroll;
+        const idx = Math.min(Math.floor(progress * NUM_CLUBS), NUM_CLUBS - 1);
+        setClub(idx);
+      }
+    }, { passive: true });
+
+    /* Nav manual */
+    navItems.forEach(item => {
+      item.addEventListener('click', () => setClub(parseInt(item.dataset.idx)));
+    });
+
+    /* ── COUNT-UP ─────────────────────────────────────────────── */
+    function countUp(el, target, duration = 1800) {
+      const start = Date.now();
+      const orig = el.textContent;
+      const hasSuffix = isNaN(parseInt(orig.slice(-1)));
+      const suffix = hasSuffix ? orig.slice(-1) : '';
+      function step() {
+        const t = Math.min((Date.now() - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - t, 4);
+        el.textContent = Math.round(ease * target) + suffix;
+        if (t < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    const countObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const cell = e.target;
+        const target = parseInt(cell.dataset.count);
+        if (target) countUp(cell.querySelector('.num-val'), target);
+        countObs.unobserve(cell);
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.num-cell[data-count]').forEach(c => countObs.observe(c));
+
+    /* ── HERO SLIDESHOW ──────────────────────────────────────── */
+    const heroSlides = document.querySelectorAll('.hero-slide');
+    const heroInds = document.querySelectorAll('.hero-ind');
+    let heroIdx = 0;
+
+    function goToSlide(idx) {
+      const prev = heroIdx;
+      if (prev === idx) return;
+      heroIdx = idx;
+      heroSlides.forEach((s, i) => s.style.zIndex = i === idx ? '1' : '0');
+      heroSlides[idx].classList.add('active');
+      heroInds[idx].classList.add('active');
+      setTimeout(() => {
+        heroSlides[prev].classList.remove('active');
+        heroInds[prev].classList.remove('active');
+      }, 1150);
+    }
+
+    heroInds.forEach(ind => {
+      ind.addEventListener('click', () => goToSlide(parseInt(ind.dataset.slide)));
+    });
+
+    setInterval(() => goToSlide((heroIdx + 1) % heroSlides.length), 4500);
+
+    /* ── PROFILE SLIDER ──────────────────────────────────────── */
+    const profileSliderEl = document.getElementById('profile-slider');
+    const profileIndEls = document.querySelectorAll('.profile-ind');
+    const profileBadgeEl = document.getElementById('profile-badge');
+    const profileLabels = ['Real Madrid · 2024–25', 'Real Madrid · 2022', 'Selección Española Sub-21 · 2019'];
+    let profileIdx = 0;
+
+    function goProfileSlide(idx) {
+      profileIdx = idx;
+      profileSliderEl.style.transform = `translateX(-${idx * 100 / 3}%)`;
+      profileIndEls.forEach((ind, i) => ind.classList.toggle('active', i === idx));
+      profileBadgeEl.textContent = profileLabels[idx];
+    }
+
+    profileIndEls.forEach(ind => {
+      ind.addEventListener('click', () => goProfileSlide(parseInt(ind.dataset.slide)));
+    });
+
+    setInterval(() => goProfileSlide((profileIdx + 1) % 3), 4200);
+  </script>
+
+</body>
+
+</html>
