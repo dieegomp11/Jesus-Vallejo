@@ -41,7 +41,6 @@
 
     html {
       scroll-behavior: smooth;
-      overflow-x: hidden;
     }
 
     body {
@@ -1167,7 +1166,40 @@
       }
 
       .sel-card-img {
+        aspect-ratio: 3/4;
+      }
+    }
+
+    /* Responsive selección — móvil: texto debajo de la imagen */
+    @media (max-width: 768px) {
+      .sel-cards {
+        grid-template-columns: 1fr;
+        gap: 2px;
+      }
+
+      .sel-card-img {
         aspect-ratio: 4/3;
+      }
+
+      .sel-card-body {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        right: auto;
+        background: var(--navy-mid);
+        padding: 20px 20px;
+      }
+
+      .sel-card-year {
+        display: none;
+      }
+
+      .sel-card-title {
+        font-size: 18px;
+      }
+
+      .sel-card-desc {
+        font-size: 13px;
       }
     }
 
