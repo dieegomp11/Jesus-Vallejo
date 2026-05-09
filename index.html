@@ -41,6 +41,7 @@
 
     html {
       scroll-behavior: smooth;
+      overflow-x: clip;
     }
 
     body {
@@ -1399,19 +1400,44 @@
         font-size: 36px;
       }
 
-      /* Timeline: tarjeta al fondo, imagen visible arriba */
+      /* Timeline móvil: tarjeta compacta al fondo, imagen visible arriba */
+      .tl-bg-img {
+        object-position: center 25%;
+      }
+
       .tl-panel {
         align-items: flex-end;
-        padding: 0 20px 28px;
+        padding: 0 16px 24px;
       }
 
       .tl-card {
-        padding: 28px 24px;
+        padding: 20px 20px 16px;
         max-width: 100%;
+        max-height: 44dvh;
+        overflow-y: auto;
       }
 
       .tl-watermark {
-        font-size: 72px;
+        font-size: 60px;
+      }
+
+      .tl-stats {
+        gap: 12px;
+        margin-top: 16px;
+        padding-top: 16px;
+      }
+
+      .tl-sv {
+        font-size: 22px;
+      }
+
+      .tl-desc {
+        font-size: 13px;
+        margin-top: 12px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
       }
 
       .numbers-grid {
