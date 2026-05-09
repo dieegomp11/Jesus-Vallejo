@@ -1002,9 +1002,15 @@
       align-self: end;
     }
 
-    .sel-cards {
+    .sel-groups {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .sel-group {
+      display: flex;
+      flex-direction: column;
       gap: 2px;
     }
 
@@ -1114,10 +1120,7 @@
     }
 
     .sel-strip {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      margin-top: 2px;
+      display: contents;
     }
 
     .sel-strip-item {
@@ -1159,21 +1162,16 @@
         gap: 20px;
         margin-bottom: 48px;
       }
-
-      .sel-cards {
-        grid-template-columns: 1fr 1fr;
-        gap: 2px;
-      }
-
-      .sel-card-img {
-        aspect-ratio: 3/4;
-      }
     }
 
-    /* Responsive selección — móvil: texto debajo de la imagen */
+    /* Responsive selección — móvil: una columna completa por torneo */
     @media (max-width: 768px) {
-      .sel-cards {
+      .sel-groups {
         grid-template-columns: 1fr;
+        gap: 4px;
+      }
+
+      .sel-group {
         gap: 2px;
       }
 
@@ -1187,19 +1185,15 @@
         left: auto;
         right: auto;
         background: var(--navy-mid);
-        padding: 20px 20px;
+        padding: 20px;
       }
 
       .sel-card-year {
         display: none;
       }
 
-      .sel-card-title {
-        font-size: 18px;
-      }
-
-      .sel-card-desc {
-        font-size: 13px;
+      .sel-strip-item {
+        height: 180px;
       }
     }
 
@@ -1878,78 +1872,77 @@
         </p>
       </div>
 
-      <div class="sel-cards">
+      <div class="sel-groups">
 
         <!-- Sub-19 2015 -->
-        <div class="sel-card reveal">
-          <div class="sel-card-img">
-            <img src="vallejo2015.jpg" alt="Europeo Sub-19 2015">
-            <div class="sel-card-img-overlay"></div>
-            <div class="sel-card-year">15</div>
+        <div class="sel-group reveal">
+          <div class="sel-card">
+            <div class="sel-card-img">
+              <img src="vallejo2015.jpg" alt="Europeo Sub-19 2015">
+              <div class="sel-card-img-overlay"></div>
+              <div class="sel-card-year">15</div>
+            </div>
+            <div class="sel-card-body">
+              <span class="sel-badge oro">Oro</span>
+              <h3 class="sel-card-title">Europeo Sub-19<br>Grecia 2015</h3>
+              <p class="sel-card-desc">
+                Campeón de Europa con la selección española sub-19 siendo capitán.
+                Un título que marcó el inicio de una relación especial con La Roja.
+              </p>
+            </div>
           </div>
-          <div class="sel-card-body">
-            <span class="sel-badge oro">Oro</span>
-            <h3 class="sel-card-title">Europeo Sub-19<br>Grecia 2015</h3>
-            <p class="sel-card-desc">
-              Campeón de Europa con la selección española sub-19 siendo capitán.
-              Un título que marcó el inicio de una relación especial
-              con La Roja.
-            </p>
+          <div class="sel-strip-item">
+            <img src="vallejo2015europeo.jpg" alt="Europeo Sub-19 2015">
+            <span class="sel-strip-caption">Europeo Sub-19 2015</span>
           </div>
         </div>
 
         <!-- Sub-21 2019 -->
-        <div class="sel-card reveal">
-          <div class="sel-card-img">
-            <img src="vallejoeuropeo.jpeg" alt="Europeo Sub-21 2019">
-            <div class="sel-card-img-overlay"></div>
-            <div class="sel-card-year">19</div>
+        <div class="sel-group reveal">
+          <div class="sel-card">
+            <div class="sel-card-img">
+              <img src="vallejoeuropeo.jpeg" alt="Europeo Sub-21 2019">
+              <div class="sel-card-img-overlay"></div>
+              <div class="sel-card-year">19</div>
+            </div>
+            <div class="sel-card-body">
+              <span class="sel-badge oro">Oro · Capitán</span>
+              <h3 class="sel-card-title">Europeo Sub-21<br>Italia 2019</h3>
+              <p class="sel-card-desc">
+                Capitán de la selección española sub-21 que conquistó
+                el título europeo en Italia. Liderazgo y personalidad en cada partido.
+              </p>
+            </div>
           </div>
-          <div class="sel-card-body">
-            <span class="sel-badge oro">Oro · Capitán</span>
-            <h3 class="sel-card-title">Europeo Sub-21<br>Italia 2019</h3>
-            <p class="sel-card-desc">
-              Capitán de la selección española sub-21 que conquistó
-              el título europeo en Italia. Liderazgo y personalidad
-              en cada partido.
-            </p>
+          <div class="sel-strip-item">
+            <img src="vallejoseleccion2.jpg" alt="Europeo Sub-21 2019">
+            <span class="sel-strip-caption">Europeo Sub-21 2019</span>
           </div>
         </div>
 
         <!-- JJOO Tokio 2021 -->
-        <div class="sel-card reveal">
-          <div class="sel-card-img">
-            <img src="vallejojjoo2.jpeg" alt="JJOO Tokio 2021">
-            <div class="sel-card-img-overlay"></div>
-            <div class="sel-card-year">21</div>
+        <div class="sel-group reveal">
+          <div class="sel-card">
+            <div class="sel-card-img">
+              <img src="vallejojjoo2.jpeg" alt="JJOO Tokio 2021">
+              <div class="sel-card-img-overlay"></div>
+              <div class="sel-card-year">21</div>
+            </div>
+            <div class="sel-card-body">
+              <span class="sel-badge plata">Plata</span>
+              <h3 class="sel-card-title">Juegos Olímpicos<br>Tokio 2020</h3>
+              <p class="sel-card-desc">
+                Medalla de plata en los Juegos Olímpicos de Tokio,
+                una de las gestas más emotivas del deporte español en la disciplina olímpica.
+              </p>
+            </div>
           </div>
-          <div class="sel-card-body">
-            <span class="sel-badge plata">Plata</span>
-            <h3 class="sel-card-title">Juegos Olímpicos<br>Tokio 2020</h3>
-            <p class="sel-card-desc">
-              Medalla de plata en los Juegos Olímpicos de Tokio,
-              una de las gestas más emotivas del deporte español
-              en la disciplina olímpica.
-            </p>
+          <div class="sel-strip-item">
+            <img src="vallejojjoo3.jpg" alt="JJOO Tokio 2020">
+            <span class="sel-strip-caption">JJOO Tokio 2020</span>
           </div>
         </div>
 
-      </div>
-
-      <!-- Franja de fotos JJOO -->
-      <div class="sel-strip">
-        <div class="sel-strip-item">
-          <img src="vallejo2015europeo.jpg" alt="Europeo Sub-19 2015">
-          <span class="sel-strip-caption">Europeo Sub-19 2015</span>
-        </div>
-        <div class="sel-strip-item">
-          <img src="vallejoseleccion2.jpg" alt="Europeo Sub-21 2019">
-          <span class="sel-strip-caption">Europeo Sub-21 2019</span>
-        </div>
-        <div class="sel-strip-item">
-          <img src="vallejojjoo3.jpg" alt="JJOO Tokio 2020">
-          <span class="sel-strip-caption">JJOO Tokio 2020</span>
-        </div>
       </div>
 
     </div>
